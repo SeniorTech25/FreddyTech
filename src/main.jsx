@@ -52,6 +52,10 @@ function App() {
   const result = query.trim() ? (intent ? routes[intent.id] : { title: 'Something a little different?', description: 'You do not need to put it in a category. Tell me what you have in mind.', cta: 'Let\'s figure it out' }) : selected ? routes[selected] : null;
 
   function openContact(message = '', topic = 'A new idea') {
+    if (topic === routes.preserve.title) {
+      window.location.assign('/memories/');
+      return;
+    }
     contactTrigger.current = document.activeElement;
     if (message) setDraft(message);
     setContactTopic(topic);
@@ -116,7 +120,7 @@ function App() {
       <section className="preservation" id="preservation" aria-labelledby="preservation-heading">
         <div className="preservation-photo"><img src="/preservation-still.png" alt="VHS tapes and a small cassette, including a sleeve marked Summer 1998" width="1536" height="1024" loading="lazy" /></div>
         <div className="preservation-shade" />
-        <div className="shell preservation-inner"><Reveal><span className="eyebrow">02 / SOME THINGS ARE IRREPLACEABLE</span><h2 id="preservation-heading">Your memories<br />weren't meant<br />to stay on tape<span>.</span></h2><p>The family holidays. The school plays. The voices you haven't heard in years. Let's bring them back into your life.</p><button className="button button-white" onClick={() => openContact(routes.preserve.prompt, 'Tape digitization')}>Let's talk about your tapes<ArrowUpRight size={20} /></button><div className="tape-formats"><span>TAPE DIGITIZATION</span><span>RESTORATION</span><span>DIGITAL ARCHIVING</span></div></Reveal></div>
+        <div className="shell preservation-inner"><Reveal><span className="eyebrow">02 / SOME THINGS ARE IRREPLACEABLE</span><h2 id="preservation-heading">Your memories<br />weren't meant<br />to stay on tape<span>.</span></h2><p>The family holidays. The school plays. The voices you haven't heard in years. Let's bring them back into your life.</p><a className="button button-white" href="/memories/">Let's talk about your tapes<ArrowUpRight size={20} /></a><div className="tape-formats"><span>TAPE DIGITIZATION</span><span>RESTORATION</span><span>DIGITAL ARCHIVING</span></div></Reveal></div>
         <div className="preservation-foot shell"><span><FilmStrip size={18} /> Old formats. New possibilities.</span><span>Have VHS, MiniDV or Hi8? Tell me what you've got.</span></div>
       </section>
 
